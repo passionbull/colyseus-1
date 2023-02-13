@@ -40,8 +40,10 @@
 
     <script>
         var host = window.document.location.host.replace(/:.*/, '');
+        var url_ = 'ws://localhost:2567'
+        var client = new Colyseus.Client(url_);
 
-        var client = new Colyseus.Client(location.protocol.replace("http", "ws") + "//" + host + (location.port ? ':' + location.port : ''));
+        // var client = new Colyseus.Client(location.protocol.replace("http", "ws") + "//" + host + (location.port ? ':' + location.port : ''));
         var room;
         client.joinOrCreate("state_handler").then(room_instance => {
             room = room_instance
@@ -59,6 +61,7 @@
                 dom.innerText = "Player " + sessionId;
 
                 player.onChange = function (changes) {
+                    console.log('onchange',player)
                     dom.style.left = player.x + "px";
                     dom.style.top = player.y + "px";
                 }
